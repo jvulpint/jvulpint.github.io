@@ -1,0 +1,12 @@
+<html>
+<head>
+<title>OAuth2 Redirect</title>
+</head>
+<body>
+<script>
+    var params = window.location.hash.substr(1);
+    window.opener.postMessage(params, "*");
+    window.close();
+</script>
+</body>
+</html>

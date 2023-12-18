@@ -1,0 +1,88 @@
+# ----------- CLEANING THE DATA -----------
+# Column rename & Dropping
+
+Short_pick_decWk1.rename(columns={'Bin:': 'Pickface', 'Part Number:': 'Stock Code', 'Picked By:': 'Picker', 'Site Qty @ Pick Time': 'Warehouse Qty', 'Bin Qty @ Pick Time': 'Pickface Qty'}, inplace=True)
+
+# Dropping columns
+columns_to_drop = ['Delivery To Name:', 'Exported?', 'Sales Order:', 'Part Description:', 'Time:' ]  # List of columns to drop
+Short_pick_decWk1.drop(columns=columns_to_drop, inplace=True)
+
+# Creating a new DataFrame
+Short_DecWk1 = Short_pick_decWk1.copy()  # Creating a copy of the modified DataFrame
+
+drop_condition = (Short_DecWk1['Picked:'] == 0) & (Short_DecWk1['Warehouse Qty'] == 0)  & (Short_DecWk1['Pickface Qty'] == 0)
+
+Short_DecWk1 = Short_DecWk1[~drop_condition]
+
+print(Short_DecWk1)
+--------------------------------------------------------------
+# Renaming columns
+original_df.rename(columns={'A': 'Column_A', 'B': 'Column_B', 'C': 'Column_C'}, inplace=True)
+
+# Dropping columns
+columns_to_drop = ['Column_B']  # List of columns to drop
+original_df.drop(columns=columns_to_drop, inplace=True)
+
+# Creating a new DataFrame
+new_df = original_df.copy()  # Creating a copy of the modified DataFrame
+
+# Displaying the new DataFrame
+print(new_df)
+
+# Creating a new column containing the difference
+df['Difference'] = df['Column_A'] - df['Column_B']
+
+# Creating a new column containing the difference
+original_df['Difference'] = original_df['New_Column_A'] - original_df['New_Column_C']
+
+# Creating a new DataFrame with selected columns and the 'Difference' column
+new_df = original_df[['New_Column_A', 'New_Column_C', 'Difference']].copy()
+
+-------------------------------------------------------------------------------------------
+# No of respondents by Country
+sns.countplot(x = imp_data['country_live'], hue = imp_data['tech_flag'], ax=ax1)
+ax1.set_title('No. of Respondents by Country and tech_flag', fontsize = 20)
+ax1.set_xticklabels(ax1.get_xticklabels(), rotation=15, ha="right")
+ax1.set_xlabel('Country', fontsize = 18)
+ax1.set_ylabel('Count', fontsize = 18)
+ax1.legend(['Not in Tech', 'In Tech'])
+
+-------------------------------------------------------------------------------------------
+
+
+#filter dataframe to retreive items with specific criteria
+filtered_items = df[(df['warehouse qty'] == 0) & (df['pickface qty'] == 0) & (df['picked'] >= 1)]
+
+#assuming 'picked' as independent variable and 'pickface qty' as dependend
+
+X = filtered_items[['picked']] # IV
+Y = filtered_items[['pickface qty']] #DV
+-------------------------------------------------------------------------------------------
+
+#create linear regression model
+
+model = linearRegression()
+
+#fit model
+
+model.fit(X, Y)
+
+#predict 'pickface qty' based on 'picked'
+
+predicted_values = model.predict(X)
+
+#get the coefficients (slope)
+
+slope = model.coef_
+
+#get the intercept
+
+intercept = model.intercept_
+
+#print slope and intercept
+
+print("Slope:", slope) #slope is rate of change in Y per unit change in X
+print("Intercept:", intercept) #intercept indicates the y value when x value is 0
+
+
+

@@ -1,0 +1,29 @@
+# Sample DataFrame
+data = {
+    'A': [1, 2, 3],
+    'B': [4, 5, 6],
+    'C': [7, 8, 9]
+}
+original_df = pd.DataFrame(data)
+
+# Renaming columns
+original_df.rename(columns={'A': 'Column_A', 'B': 'Column_B', 'C': 'Column_C'}, inplace=True)
+
+# Dropping columns
+columns_to_drop = ['Column_B']  # List of columns to drop
+original_df.drop(columns=columns_to_drop, inplace=True)
+
+# Creating a new DataFrame
+new_df = original_df.copy()  # Creating a copy of the modified DataFrame
+
+# Displaying the new DataFrame
+print(new_df)
+
+# Creating a new column containing the difference
+df['Difference'] = df['Column_A'] - df['Column_B']
+
+# Creating a new column containing the difference
+original_df['Difference'] = original_df['New_Column_A'] - original_df['New_Column_C']
+
+# Creating a new DataFrame with selected columns and the 'Difference' column
+new_df = original_df[['New_Column_A', 'New_Column_C', 'Difference']].copy()

@@ -1,0 +1,25 @@
+#Add day of the week column 
+
+data_01 = ['Day_of_Week'] = 'Thursday_301123'
+data_02 = ['Day_of_Week'] = 'Friday_011223'
+data_03 = ['Day_of_Week'] = 'Sunday_031223'
+data_04 = ['Day_of_Week'] = 'Monday_041223'
+data_05 = ['Day_of_Week'] = 'Tuesday_051223'
+data_06 = ['Day_of_Week'] = 'Wednesday_061223'
+data_07 = ['Day_of_Week'] = 'Thursday_071223'
+data_08 = ['Day_of_Week'] = 'Friday_081223'
+
+#concatenate all DF into one
+
+combined_data = pd.concat([data_01, data_02, data_03, data_04, data_05, data_06, data_07, data_08])
+
+#Read each CSV into separate dataframes
+
+data_01 = pd.read_csv('Data/Pickers011223.csv')
+data_02 = pd.read_csv('Data/Pickers021223.csv')
+data_03 = pd.read_csv('Data/Pickers031223.csv')
+data_04 = pd.read_csv('Data/Pickers041223.csv')
+data_05 = pd.read_csv('Data/Pickers051223.csv')
+data_06 = pd.read_csv('Data/Pickers061223.csv')
+data_07 = pd.read_csv('Data/Pickers071223.csv')
+data_08 = pd.read_csv('Data/Pickers081223.csv')

@@ -1,0 +1,20 @@
+def parse_time(row):
+    if isinstance(row, str):
+        time_parts = row.strip().split(':')
+        hour = int(time_parts[0])
+
+    if len(time_parts) > 1:
+        minute_parts = time_parts[1].split()
+        minute = int(minute_parts[0])
+        if len(minute_parts) > 1:
+            period = minute_parts[1]
+            if period.lower() == 'pm' and hour != 12:
+                hour += 12
+            else:
+                period = 'am'
+        else:
+            minute = 0 
+            period = 'am'
+
+        return f"{hour:02d}:{minute:02d}"
+    return row
